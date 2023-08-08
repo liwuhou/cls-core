@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node ./src/index.ts"
+    "dev": "ts-node ./src/index.ts",
+    "exec": "ts-node"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/mongoose": "^5.11.97",
     "@types/node": "^20.4.8",
     "eslint": "^8.46.0",
     "prettier": "^3.0.1",
@@ -19,6 +21,7 @@
   "dependencies": {
     "dayjs": "^1.11.9",
     "dotenv": "^16.3.1",
+    "mongoose": "^7.4.2",
     "tencentcloud-sdk-nodejs": "^4.0.659"
   }
 }
