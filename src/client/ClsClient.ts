@@ -1,6 +1,8 @@
+import 'dotenv/config'
 import * as tencentcloud from 'tencentcloud-sdk-nodejs'
 import { ClientConfig } from 'tencentcloud-sdk-nodejs/tencentcloud/common/interface'
-import { SearchLogRequest } from 'tencentcloud-sdk-nodejs/tencentcloud/services/cls/v20201016/cls_models'
+
+const TClsClient = tencentcloud.cls.v20201016.Client
 
 const CLIENT_CONFIG: ClientConfig = {
   credential: {
@@ -18,12 +20,18 @@ const CLIENT_CONFIG: ClientConfig = {
   },
 }
 
-const TclsClient = new tencentcloud.cls.v20201016.Client(CLIENT_CONFIG)
+const Client = new TClsClient(CLIENT_CONFIG)
+
+type dePromise<T> = T extends Promise<infer U> ? U : T
+export type SearchLogParams = Parameters<typeof Client.SearchLog>[0]
+export type SearchLogResponse = ReturnType<typeof Client.SearchLog>
+export type IContext = dePromise<SearchLogResponse>['Context'] | undefined
+export type LogInfos = dePromise<SearchLogResponse>['Results'] | null
 
 // 搜索日志
-export const searchLog = async (params: SearchLogRequest) => {
+export const searchLog = async (params: SearchLogParams): Promise<SearchLogResponse> => {
   return new Promise((resolve, reject) => {
-    TclsClient.SearchLog(params).then(
+    Client.SearchLog(params).then(
       (data) => resolve(data),
       (error) => reject(error),
     )
