@@ -1,17 +1,17 @@
 import { connect } from 'mongoose'
-import { RequestUrlModel } from './model/RequestModel'
-import type { RequestUrl } from './model/RequestModel'
 export * from './model/RequestModel'
-export { Types } from 'mongoose'
+export * from './model/SnapshootModel'
 
 // 建连 mongodb
-export const connectMongodb = (() => {
-  const checkConnectedMap: Record<string, boolean> = {}
-  return async (dbName = 'cls') => {
-    if (checkConnectedMap[dbName]) return true
+const checkConnectedMap: Record<string, boolean> = {}
+export const connectMongodb = async (dbName = 'cls') => {
+  if (checkConnectedMap[dbName]) return true
 
-    await connect(`mongodb://127.0.0.1:27017/${dbName}`)
+  await connect(`mongodb://127.0.0.1:27017/${dbName}`)
 
-    return (checkConnectedMap[dbName] = true)
-  }
-})()
+  return (checkConnectedMap[dbName] = true)
+}
+
+export const closeMongodb = async () => {
+  process.exit(0)
+}

@@ -1,6 +1,7 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model, Types } from 'mongoose'
 
 export interface RequestUrl {
+  date: Date
   url: string
   params: Record<string, any>
   timeout: number
@@ -15,6 +16,7 @@ export interface RequestUrl {
 }
 
 export const RequestUrlSchema = new Schema<RequestUrl>({
+  date: Date,
   url: { type: String },
   params: { type: Object },
   timeout: { type: Number },
