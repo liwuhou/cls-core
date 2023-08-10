@@ -1,8 +1,10 @@
+import * as dayjs from 'dayjs'
 import { RequestUrl, RequestUrlModel } from '../model/RequestModel'
+import { SnapshootUrlModel } from '../model/SnapshootModel'
 import { searchLog } from './ClsClient'
 import type { IContext, LogInfos, SearchLogParams } from './ClsClient'
-import * as dayjs from 'dayjs'
 
+// 获取 cls 日志
 export const requestLog = async (params: Omit<SearchLogParams, 'Context'>, Context?: IContext) => {
   const {
     Context: ResContext,
@@ -42,7 +44,7 @@ const handleResultes = async (logInfos: LogInfos) => {
   }
 }
 
-// 写入
+// 写入快照中的 url
 const handleReqeustQueueSnapshoot = async (queue: string[], date: Date) => {
   if (!Array.isArray(queue) || !queue.length) return
 

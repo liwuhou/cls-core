@@ -12,6 +12,6 @@ export const connectMongodb = async (dbName = 'cls') => {
   return (checkConnectedMap[dbName] = true)
 }
 
-export const closeMongodb = async () => {
-  process.exit(0)
+export const closeMongodb = async (code = 0) => {
+  process.exit(code)
 }
